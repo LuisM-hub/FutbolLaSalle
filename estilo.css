@@ -1,0 +1,132 @@
+  /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+
+
+html { width: 100%; height:100%; overflow:hidden; }
+
+body { 
+    overflow-y : auto;
+	width: 100%;
+	height:100%;
+	font-family: 'Open Sans', sans-serif;
+	
+}
+.center {
+  margin: 0 auto;
+  width: 720px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.formALum{
+	background-color: rgb(242, 153, 74);  
+	padding: 10px;
+	border-radius: 10px;
+	width: 720px;
+}
+.rowAl{
+	width: 20px;
+}
+.imgRedonda {
+    width:100px;
+    height:100px;
+    border-radius:150px;
+    border:1px solid rgb(242, 201, 76);
+}
+.contentAl{
+	border-bottom-color:rgb(242, 201, 76);
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+
+.datosAl{
+	
+	color:black;
+	text-align: center;
+	font: bold;
+	font-size: 18px;
+	margin-left: 20px;
+}
+.login { 
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -150px 0 0 -150px;
+	width:300px;
+	height:300px;
+}
+.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+.btnMy{
+	width: 100%; 
+	margin-bottom: 10px; 
+	background: #990610;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	border-radius: 4px;	
+}
+.btnMy:hover{
+	
+	background: #75020a;
+	color:crimson;
+}
+.perfAlum{
+	
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  background: red;
+background-color: rgb(111, 207, 151);
+	
+}
+
+.pop{
+	font-size: 9px;
+}
+
+
+
+.inputUs{
+	color: white; 
+	border-left: thin;
+	border-left-style: solid;
+	border-left-color: rgb(51, 51, 51); 
+	border-right: thin;
+	border-right-style: solid;
+	border-right-color: rgb(51, 51, 51); 
+	border-color: rgb(51, 51, 51);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color:white;
+}
+input { 
+	width: 100%; 
+	margin-bottom: 10px; 
+	background: rgba(0,0,0,0.3);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #ffffff;
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;
+}
+input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }

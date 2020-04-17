@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cambio de contraseña</title>
+	<link href="estilo.css" rel="stylesheet" text="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+
+<body style="background-color: lavender">
+
+  <div class="row">
+    <form class="col s12" action="cambio.php" method="post">
+			<div class="row"></div>
+			<div class="row"></div>
+		
+			<div class="row">
+				<div class="input-field col s3"></div>
+				 <div class="input-field col s6">
+				  <input id="correo" type="email" class="validate" name="correo" required>
+				  <label for="correo">Email</label>
+			   </div>
+			</div>
+			<div class="row">
+				<div class="input-field col s3"></div>
+				 <div class="input-field col s6">
+				  <input id="validar" type="password" class="validate" name="validar" required>
+				  <label for="validar">Codigo verificación</label>
+			   </div>
+			</div>
+			<div class="row">
+					<div class="input-field col s3"></div>
+				  <div class="input-field col s3">
+					  <input id="contra" type="password" class="validate" name="contra" required>
+					  <label for="contra">Contraseña nueva</label>
+				  </div>
+					<div class="input-field col s3">
+					  <input id="contra2" type="password" class="validate" name="contra2" required>
+					  <label for="contra2">Repita contraseña</label>
+					</div>
+			</div>
+		<button type="submit" class="btnMy"> Aceptar </button>	
+    </form>
+</div>
+	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
+
+
+
