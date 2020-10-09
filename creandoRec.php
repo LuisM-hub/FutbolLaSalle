@@ -5,6 +5,10 @@ include 'database.php';
 if(isset($_POST['nombre']) && ($_POST['apellido']) && ($_POST['email']) && ($_POST['usuario']) && ($_POST['contra'])  && ($_POST['equipo']) )
 {
 	try{
+			session_start();
+			$usuario= $_SESSION['user'];
+			$fechaC = date("Y-m-d h:i:sa");
+
 			$nombre =  $conexion->real_escape_string($_POST["nombre"]);
 			$apellido =  $conexion->real_escape_string($_POST["apellido"]);
 			$correo =  $conexion->real_escape_string($_POST["email"]);
@@ -13,8 +17,9 @@ if(isset($_POST['nombre']) && ($_POST['apellido']) && ($_POST['email']) && ($_PO
 			$equipo = $conexion->real_escape_string($_POST["equipo"]);
 
 			$varSalt = uniqid();
-			$passSeguro = hash("sha256",$contra.$varSalt);
-
+			$seed="MiSecreto100";
+			//$passSeguro =bycript(hash("sha256",$contra.$varSalt),$seed);
+			$passSeguro =hash("sha256",$contra.$varSalt.$seed);
 			$fechaC = date("Y-m-d h:i:sa");
 		 	
 				$checkEmail= "SELECT * FROM Users where Mail = '$correo' and Status = 1";
@@ -35,9 +40,9 @@ if(isset($_POST['nombre']) && ($_POST['apellido']) && ($_POST['email']) && ($_PO
 					}
 						else
 						{
-							$sql3="INSERT into Users (User_ID, Password, Salt, User_Type, User_Creation_Date, Mail, Name, Last_Name, Status) VALUES('$usuario','$passSeguro','$varSalt',3,'$fechaC','$correo','$nombre','$apellido', 1);";
+							$sql3="INSERT into Users (User_ID, Password, Salt, User_Type, User_Creation_Date, Mail, Name, Last_Name, Status, Creation_date, Creator) VALUES('$usuario','$passSeguro','$varSalt',3,'$fechaC','$correo','$nombre','$apellido', 1, '$fechaC','$usuario');";
 							$resultado = $conexion->query($sql3);
-							$sql1="INSERT into Recruiters (ID_Recruiter, Associated_Club) VALUES('$usuario','$equipo');";
+							$sql1="INSERT into Recruiters (ID_Recruiter, Associated_Club, Creation_date, Creator) VALUES('$usuario','$equipo','$fechaC','$usuario');";
 							$resultado = $conexion->query($sql1);
 							if($resultado){
 								echo '<script> alert("Se agregó el usuario."); </script>';

@@ -12,6 +12,52 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	
 }
+.btnsmall{
+	display: none; /* Hidden by default */
+	font-size: 12px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  margin: auto;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: rgba(92,152,244,0.61);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 .center {
   margin: 0 auto;
   width: 720px;
@@ -19,7 +65,7 @@ body {
   padding: 10px;
 }
 .formALum{
-	background-color: rgb(242, 153, 74);  
+	background-color: rgba(239,129,33,0.66);  
 	padding: 10px;
 	border-radius: 10px;
 	width: 720px;
@@ -39,25 +85,29 @@ body {
 	border-bottom-width: thin;
 	border-bottom-left-radius: 7px;
 	border-bottom-right-radius: 7px;
+	margin-top: 10px;
 }
 
 .datosAl{
 	
-	color:black;
+	color:white;
 	text-align: center;
 	font: bold;
-	font-size: 18px;
+	font-size: 26px;
+	font-family: "Helvetica";
 	margin-left: 20px;
+	
 }
 .login { 
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin: -150px 0 0 -150px;
-	width:300px;
-	height:300px;
+	width:700px;
+	height:700px;
 }
-.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+.login input{ margin-top: 10px;}
+.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; font-size: 30px;}
 .btnMy{
 	width: 100%; 
 	margin-bottom: 10px; 
@@ -90,6 +140,13 @@ background-color: rgb(111, 207, 151);
 
 .pop{
 	font-size: 9px;
+	background: rgba(94,89,89,1.00);
+	border-radius: 4px;
+	border-color:rgba(94,89,89,1.00); 
+}
+.pop:hover{
+	color: #990610;
+	cursor: pointer;
 }
 
 

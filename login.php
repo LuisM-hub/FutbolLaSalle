@@ -40,10 +40,12 @@ if(isset($_POST['u']) && isset($_POST['p']))
 	$res=mysqli_fetch_array($consulta);
 	mysqli_close($conexion);
  	
-
+	
 	if($res){
+		$seed="MiSecreto100";
 		$passU=$res['Password'];
-		$hashedPassword=hash("sha256",$password.$res["Salt"]);
+		//$hashedPassword =bycript(hash("sha256",$$password.$res["Salt"]),$seed);
+		$hashedPassword=hash("sha256",$password.$res["Salt"].$seed);
 	//echo $hashedPassword;
 	if($passU == $hashedPassword)
 	{
@@ -73,7 +75,7 @@ if(isset($_POST['u']) && isset($_POST['p']))
 	}
 	else{
 		echo '<script>
-		alert("Datos incorrectos");
+		alert("El usuario no existe");
 		window.history.go(-1);
 			</script>';
 		exit;

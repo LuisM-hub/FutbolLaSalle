@@ -1,3 +1,19 @@
+<?php
+
+session_start();
+if(!isset($_SESSION['rol']))
+{
+	header('location: inicio.php');
+}
+else{
+	if($_SESSION['rol'] != 1)
+	{
+		header('location: inicio.php');
+	}
+}
+
+?>
+
 <html>
 
 <head>
@@ -5,12 +21,9 @@
   <!-- Estilos de internet -->
 
   <title>Ajustes</title>
+	
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 </head>
 
@@ -41,7 +54,7 @@
 
 </script>
 
-<body style="background-color: #4f4f4f">
+<body style="background-image: url('https://images.pexels.com/photos/2306898/pexels-photo-2306898.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); overflow: hidden; background-repeat: no-repeat;background-attachment: fixed; background-size: cover">
 
 
 
@@ -52,11 +65,11 @@
 // Utilizamos la variable global para que te traiga la clave y poder obtener todos sus datos, para ponerlos en los textbox
 
   //la variable $tabla_luisf es para no utilizar el nombre de la tabla y si cambias la tabla solo se cambia en el conexion.php
-
+/*
   session_start();
 
   ob_start();
-
+*/
   $clave = $_SESSION['claveR'];
 //echo $clave;
  
@@ -93,11 +106,11 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
   <div class="col-md-4">
 
-    <center><h1 style="color: #2f61a3;">CAMBIOS EN LA INFORMACION DEL ADMINISTRACIÓN</h1></center>
+    <center><h1 style=" color: white; align-self: center; text-align: center; font-family: Impact; font:bolder; font-size: 50px; opacity: 1; padding: 1px; margin: 1px;">CAMBIOS EN LA INFORMACION DEL RECLUTADOR</h1></center>
 
     <!-- Los campos de la actualización o eliminar -->
 
-    <form method="POST" action="cambioRec2.php" style="background-color: #2f61a3; width: 90%;margin: auto; padding: 10px;">
+    <form method="POST" action="cambioRec2.php" style="background-color: rgba(128,128,128,0.51); width: 90%;margin: auto; padding: 10px; font-weight: bold; font-family: Helvetica; color: white; padding: 10px;">
 
 
 
@@ -105,7 +118,7 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
       <label for="usr">Usuario</label>
 
-      <input type="text" name="usr" class="form-control" onchange="setName();" id="usr" value="<?php echo $clave;?>" required pattern="[a-zA-Z0-9]+">
+      <input type="text" name="usr" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" onchange="setName();" id="usr" value="<?php echo $clave;?>" required pattern="[a-zA-Z0-9]+">
 
     </div>
 
@@ -115,7 +128,7 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
         <label for="name">Nombre</label>
 
-        <input type="text" name="name" class="form-control" id="name" value="<?php echo $nombre;?>" required pattern="[A-Za-z]+">
+        <input type="text" name="name" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" id="name" value="<?php echo $nombre;?>" required pattern="[A-Za-z]+">
 
     </div>
 
@@ -125,7 +138,7 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
         <label for="last_name">Apellido </label>
 
-        <input type="text" name="last_name" class="form-control" id="last_name"value="<?php echo $apellido;?>" required pattern="[A-Za-z]+">
+        <input type="text" name="last_name" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" id="last_name"value="<?php echo $apellido;?>" required pattern="[A-Za-z]+">
 
     </div>
 
@@ -135,7 +148,7 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
         <label for="equipo">Equipo asociado</label>
 
-        <input type="text" name="equipo" class="form-control" id="equipo" value="<?php echo $team;?>" required="required">
+        <input type="text" name="equipo" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" id="equipo" value="<?php echo $team;?>" required="required">
 
     </div>
 
@@ -145,7 +158,7 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
     <center>
 
-      <input type="submit" value="Atrás" class="btn btn-atras" name="btn_atras">
+      <input type="submit" value="Cancelar" class="btn btn-secondary" name="btn_atras">
 
       <input type="submit" value="Actualizar" class="btn btn-info" name="btn_actualizar">
 
@@ -211,11 +224,13 @@ error_reporting(E_ALL);
 					exit;
 				}
 				else{
-
-					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido' WHERE User_ID = '$clave' and Status=1 and User_Type = 3;";
+					session_start();
+					$usuario= $_SESSION['user'];
+					$fechaC = date("Y-m-d h:i:sa");
+					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido', Update_date='$fechaC', Updater='$usuario' WHERE User_ID = '$clave' and Status=1 and User_Type = 3;";
 						$upd=mysqli_query($conexion,$sql3);
 
-					$sql4="UPDATE Recruiters SET ID_Recruiter='$claveN', Associated_Club='$equipo' WHERE ID_Recruiter = '$clave';";
+					$sql4="UPDATE Recruiters SET ID_Recruiter='$claveN', Associated_Club='$equipo', Update_date='$fechaC', Updater='$usuario' WHERE ID_Recruiter = '$clave';";
 						$upd=mysqli_query($conexion,$sql4);
 
 					mysqli_close($conexion);
@@ -254,12 +269,15 @@ error_reporting(E_ALL);
 					exit;
 				}
 				else{
-					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido' WHERE User_ID = '$clave' and Status=1 and User_Type = 3;";
+					session_start();
+					$usuario= $_SESSION['user'];
+					$fechaC = date("Y-m-d h:i:sa");
+					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido', Update_date='$fechaC', Updater='$usuario' WHERE User_ID = '$clave' and Status=1 and User_Type = 3;";
 					$updA=mysqli_query($conexion,$sql3);
 					
 					if($updA)
 					{
-						$sql4="UPDATE Recruiters SET ID_Recruiter='$claveN', Associated_Club='$equipo' WHERE ID_Recruiter = '$clave';";
+						$sql4="UPDATE Recruiters SET ID_Recruiter='$claveN', Associated_Club='$equipo', Update_date='$fechaC', Updater='$usuario' WHERE ID_Recruiter = '$clave';";
 						$updA=mysqli_query($conexion,$sql4);
 						mysqli_close($conexion);
 						
@@ -329,8 +347,10 @@ error_reporting(E_ALL);
 
         else{
 			
-
-          $_UPDATE_SQL="UPDATE Users Set Status = '2' WHERE User_ID='$clave'  and User_Type = 3"; 
+			session_start();
+			$usuario= $_SESSION['user'];
+			$fechaC = date("Y-m-d h:i:sa");
+          $_UPDATE_SQL="UPDATE Users Set Status = '2', Delete_date='$fechaC', Deleter='$usuario'  WHERE User_ID='$clave'  and User_Type = 3"; 
           $delete=mysqli_query($conexion,$_UPDATE_SQL);
 			
 			if($delete){
@@ -358,6 +378,10 @@ error_reporting(E_ALL);
 
   </div>
 
+		
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 
 </html>

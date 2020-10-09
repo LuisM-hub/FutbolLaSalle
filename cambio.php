@@ -1,3 +1,20 @@
+
+<?php
+
+session_start();
+if(!isset($_SESSION['rol']))
+{
+	header('location: inicio.php');
+}
+else{
+	if($_SESSION['rol'] != 1)
+	{
+		header('location: inicio.php');
+	}
+}
+
+?>
+
 <html>
 
 <head>
@@ -5,7 +22,7 @@
   <title>Ajustes</title>
 
   <!-- Estilos de internet -->
-
+<link href="estilo.css" rel="stylesheet" text="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
@@ -14,33 +31,51 @@
 
 </head>
 
-<body style="background-color: #f2c94c">
+<body style="background-image: url('https://images.pexels.com/photos/2306898/pexels-photo-2306898.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); overflow: hidden; background-repeat: no-repeat;background-attachment: fixed; background-size: cover">
 
 
-
+<a href="admin.php" style=" border: none; color: white; padding: 0px; margin: 0px; position: relative; align-content: center"><i class="material-icons">home</i></a>
+	
 <div class="row">
 
   <div class="col-md-4"></div>
 
   <div class="col-md-4">
 
-    <center><h1>CAMBIOS EN LA INFORMACION DEL JUGADOR</h1></center>
+    <h1 style=" color: rgba(255,255,255,1.00); align-self: center; text-align: center; font-family: Impact; font:bolder; font-size: 50px; opacity: 1; padding: 1px; margin: 1px;">CAMBIOS EN LA INFORMACION DEL JUGADOR</h1>
 
 <!-- Formulario con metodo POST con un solo botón para confirmar que existe o no la clave -->
-	 <a href="admin.php" style=" border: none; color: black; padding: 0px; margin: 0px; position: relative; align-content: center"><i class="material-icons">home</i></a>
+	 
     <form method="POST" action="cambio.php" >
 
-    <div class="form-group">
+    <div class="form-group" style="margin-top: 30px;">
 
-      <label for="busca">BUSCA LA CLAVE</label>
+      <label for="busca" style=" color: rgba(255,255,255,1.00); align-self: center; text-align: center; font-family: Helvetica; font:bolder; font-size: 20px; opacity: 1; padding: 1px; margin: 1px;">BUSCA LA CLAVE</label>
 
-      <input type="number" name="clave" class="form-control" id="clave" required pattern="[0-9]+">
+      <input type="number" name="clave" class="form-control" id="clave" required pattern="[0-9]+" style="width: 100%; 
+	margin-bottom: 10px; 
+	background: rgba(0,0,0,0.52);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #ffffff;
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;">
 
     </div>
 
     <center>
 
-    	<input type="submit" value="Consultar" class="btn btn-primary" name="btn_consultar">
+    	<input type="submit" value="Consultar" class="btn btn-primary" name="btn_consultar" style="width: 100%; 
+	margin-bottom: 10px; 
+	background: #990610;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	border-radius: 4px;	">
 
     </center>
 
@@ -61,11 +96,11 @@
       	$clave = $_POST['clave'];
 
         //Aqui inicio sesion para una variable global que se utiliza en cambio 2
-
+/*
         session_start();
 
         ob_start();
-		
+		*/
         $_SESSION['clave']= $clave;
 
       	$existe =0;

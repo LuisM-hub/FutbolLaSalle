@@ -1,3 +1,20 @@
+
+<?php
+
+session_start();
+if(!isset($_SESSION['rol']))
+{
+	header('location: inicio.php');
+}
+else{
+	if($_SESSION['rol'] != 1)
+	{
+		header('location: inicio.php');
+	}
+}
+
+?>
+
 <html>
 
 <head>
@@ -5,13 +22,12 @@
   <!-- Estilos de internet -->
 
   <title>Ajustes</title>
+<link href="estilo.css" rel="stylesheet" text="text/css">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+	
 </head>
 
 <!-- Script en java para la confirmación de dar de baja jugador -->
@@ -41,7 +57,7 @@
 
 </script>
 
-<body style="background-color: #4f4f4f">
+<body style="background-image: url('https://images.pexels.com/photos/2306898/pexels-photo-2306898.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); overflow: auto; background-repeat: no-repeat;background-attachment: fixed; background-size: cover">
 
 
 
@@ -52,11 +68,11 @@
 // Utilizamos la variable global para que te traiga la clave y poder obtener todos sus datos, para ponerlos en los textbox
 
   //la variable $tabla_luisf es para no utilizar el nombre de la tabla y si cambias la tabla solo se cambia en el conexion.php
-
+/*
   session_start();
 
   ob_start();
-
+*/
   $clave = $_SESSION['clave'];
 
  
@@ -82,6 +98,10 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
     $pos = $res['Player_Position'];
 
     $numero = $res['Player_Number'];
+	
+	
+$sqlT= "Select * from Teams";
+		$result=mysqli_query($conexion,$sqlT);
 /*
  $sql3="SELECT * FROM C_Player_Position where ID_Position = '$pos';";
 	$consulta3=mysqli_query($conexion,$sql3);
@@ -94,96 +114,87 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
   
 
-<div class="row">
 
-  <div class="col-md-4"></div>
 
-  <div class="col-md-4">
+  
 
-    <center><h1 style="color: #f2c94c;">CAMBIOS EN LA INFORMACION DEL JUGADOR</h1></center>
+    <center><h1 style=" color: white; align-self: center; text-align: center; font-family: Impact; font:bolder; font-size: 50px; opacity: 1; padding: 1px; margin: 1px;">CAMBIOS EN LA INFORMACION DEL JUGADOR</h1></center>
 
     <!-- Los campos de la actualización o eliminar -->
+<div class="container" style="margin-top: 30px;"> 
+    <form method="POST" action="cambio2.php" style="background-color: rgba(128,128,128,0.51); width: 90%;margin: auto; padding: 10px; font-weight: bold; font-family: Helvetica; color: white; padding: 10px;">
 
-    <form method="POST" action="cambio2.php" style="background-color: #f2c94c; width: 90%;margin: auto; padding: 10px;">
-
-
-
-    <div class="form-group">
-
+<div class="row" style="margin-top: 7px;">		
+	<div class="col-sm">
       <label for="busca">Clave ULSA</label>
-
-      <input type="number" name="clave" class="form-control" onchange="setName();" id="clave" value="<?php echo $clave;?>" required pattern="[0-9]+">
+      <input type="number" name="clave" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" onchange="setName();" id="clave" value="<?php echo $clave;?>" required pattern="[0-9]+">
 
     </div>
 
-
-
-    <div class="form-group">
-
+    <div class="col-sm">
         <label for="name">Nombre</label>
-
-        <input type="text" name="name" class="form-control" id="name" value="<?php echo $nombre;?>" required pattern="[A-Za-z]+">
+        <input type="text" name="name" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" id="name" value="<?php echo $nombre;?>" required pattern="[A-Za-z]+">
 
     </div>
 
-
-
-    <div class="form-group">
-
+    <div class="input-field col-sm">
         <label for="last_name">Apellido </label>
+        <input type="text" name="last_name" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" id="last_name"value="<?php echo $apellido;?>" required pattern="[A-Za-z]+">
 
-        <input type="text" name="last_name" class="form-control" id="last_name"value="<?php echo $apellido;?>" required pattern="[A-Za-z]+">
-
-    </div>
+    </div>		
+</div>
 
     
-
-	<div class="form-group">
-
+<div class="row" style="margin-top: 12px;">
+		
+	<div class="col-sm">
         <label for="birth_day">Fecha de Nacimiento</label>
-
-        <input type="date" name="birth_day" class="form-control" id="birth_day" value="<?php echo $nacer;?>" required="required">
-
+        <input type="date" name="birth_day" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" id="birth_day" value="<?php echo $nacer;?>" required="required">
     </div>
 
-
-
-    <div class="form-group">
-
+    <div class="col-sm">
         <label for="team">Equipo</label>
-
-        <input type="text" name="team" class="form-control" id="team" value="<?php echo $equipo;?>" required pattern="[A-Za-z0-9]+">
-
+		<select class="browser-default form-control" style="color: white; background-color: rgba(0,0,0,0.00)" id="team" name="team" required style="height: 30px; margin-bottom: 10px;">
+							  <?php
+								
+								while($row=mysqli_fetch_assoc($result)){
+										$id=$row["ID_Team"];
+										$name = $row["Team_Name"];
+									if($id==$equipo)
+									{
+										echo " <option style='background-color: rgba(128,128,128,0.51)' selected value='$id'>$name</option>";
+									}
+									else{
+										echo " <option style='background-color: rgba(128,128,128,0.51)' value='$id'>$name</option>";
+									}
+									
+								}
+							?>
+					</select>
     </div>
 
-
-
-    <div class="form-group">
-
+    <div class="col-sm">
         <label for="posicion">Posición</label>
-		<select class="browser-default form-control" id="posicion" name="posicion" required style="height: 30px; margin-bottom: 10px;">
-						  <option value="1" <?php if ($pos == 1) echo "selected"; ?>>Delantero</option>
-						  <option value="2" <?php if ($pos == 2) echo "selected"; ?>>Portero</option>
-						  <option value="3" <?php if ($pos == 3) echo "selected"; ?>>Defensa</option>
-						  <option value="4" <?php if ($pos == 4) echo "selected"; ?>>Mediocampo</option>
+		<select class="browser-default form-control" style="color: white; background-color: rgba(0,0,0,0.00)" id="posicion" name="posicion" required style="height: 30px; margin-bottom: 10px;">
+						  <option style="background-color: rgba(128,128,128,0.51)" value="1" <?php if ($pos == 1) echo "selected"; ?>>Delantero</option>
+						  <option style="background-color: rgba(128,128,128,0.51)" value="2" <?php if ($pos == 2) echo "selected"; ?>>Portero</option>
+						  <option style="background-color: rgba(128,128,128,0.51)" value="3" <?php if ($pos == 3) echo "selected"; ?>>Defensa</option>
+						  <option style="background-color: rgba(128,128,128,0.51)" value="4" <?php if ($pos == 4) echo "selected"; ?>>Mediocampo</option>
 						</select>	
     </div>
 
 
 
-    <div class="form-group">
-
+    <div class="col-sm">
         <label for="number">Número de Playera</label>
-
-        <input type="text" name="number" class="form-control" id="number" value="<?php echo $numero;?>" required pattern="[0-9]+">
-
+        <input type="text" name="number" style="color: white; background-color: rgba(0,0,0,0.00);" class="form-control" id="number" value="<?php echo $numero;?>" required pattern="[0-9]+">
     </div>
 
+</div>
 
+    <center style="margin-top: 30px;">
 
-    <center>
-
-      <input type="submit" value="Atrás" class="btn btn-atras" name="btn_atras">
+      <input type="submit" value="Cancelar" class="btn btn-secondary" name="btn_atras">
 
       <input type="submit" value="Actualizar" class="btn btn-info" name="btn_actualizar">
 
@@ -194,7 +205,7 @@ $sql2="SELECT * FROM Users WHERE User_ID = '$clave';";
 
 
   </form>
-
+	</div>
 
 
 <?php
@@ -255,11 +266,13 @@ error_reporting(E_ALL);
 					exit;
 				}
 				else{
-
-					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido' WHERE User_ID = '$clave' and Status=1 and User_Type = 2;";
+					session_start();
+					$usuario= $_SESSION['user'];
+					$fechaC = date("Y-m-d h:i:sa");
+					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido', Update_date='$fechaC', Updater='$usuario' WHERE User_ID = '$clave' and Status=1 and User_Type = 2;";
 						$upd=mysqli_query($conexion,$sql3);
 
-					$sql4="UPDATE Students SET ULSA_ID='$claveN', Birth_Date='$nacer', Player_Position=$posicion ,Team='$equipo', Player_Number='$numero' WHERE ULSA_ID = '$clave';";
+					$sql4="UPDATE Students SET ULSA_ID='$claveN', Birth_Date='$nacer', Player_Position=$posicion ,Team='$equipo', Player_Number='$numero', Update_date='$fechaC', Updater='$usuario' WHERE ULSA_ID = '$clave';";
 						$upd=mysqli_query($conexion,$sql4);
 
 					mysqli_close($conexion);
@@ -298,12 +311,18 @@ error_reporting(E_ALL);
 					exit;
 				}
 				else{
-					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido' WHERE User_ID = '$clave' and Status=1 and User_Type = 2;";
+					session_start();
+					$usuario= $_SESSION['user'];
+					$fechaC = date("Y-m-d h:i:sa");
+					$sql3="UPDATE Users SET User_ID='$claveN', Name='$nombre', Last_Name='$apellido',  Update_date='$fechaC', Updater='$usuario'  WHERE User_ID = '$clave' and Status=1 and User_Type = 2;";
 					$updA=mysqli_query($conexion,$sql3);
 					
 					if($updA)
 					{
-						$sql4="UPDATE Students SET ULSA_ID='$claveN', Birth_Date='$nacer', Player_Position=$posicion,Team='$equipo', Player_Number='$numero' WHERE ULSA_ID = '$clave';";
+						session_start();
+						$usuario= $_SESSION['user'];
+						$fechaC = date("Y-m-d h:i:sa");
+						$sql4="UPDATE Students SET ULSA_ID='$claveN', Birth_Date='$nacer', Player_Position=$posicion,Team='$equipo', Player_Number='$numero',  Update_date='$fechaC', Updater='$usuario'  WHERE ULSA_ID = '$clave';";
 						$updA=mysqli_query($conexion,$sql4);
 						mysqli_close($conexion);
 						
@@ -373,11 +392,20 @@ error_reporting(E_ALL);
 
         else{
 			
-
-          $_UPDATE_SQL="UPDATE Users Set Status = '2' WHERE User_ID='$clave'  and User_Type = 2"; 
+			session_start();
+			$usuario= $_SESSION['user'];
+			$fechaC = date("Y-m-d h:i:sa");
+        /*  $_UPDATE_SQL="UPDATE Users Set Status = '2',  Delete_date='$fechaC', Deleter='$usuario' WHERE User_ID='$clave'  and User_Type = 2"; 
           $delete=mysqli_query($conexion,$_UPDATE_SQL);
+			*/
 			
-			if($delete){
+			include ("DAO.php");
+			$dao = new UserDAO();
+			$vo = new PlayerVO();
+			$vo->setUpdate($fechaC,$usuario,$clave);
+			$dao->Delete($vo);
+			
+			if($dao){
 				echo '<script>
 				alert("El alumno se elimino.");
 				window.location.href = "https://nemonico.com.mx/sofia/Futbol/inicio.php";
@@ -402,6 +430,11 @@ error_reporting(E_ALL);
 
   </div>
 
+	
+	
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 
 </html>

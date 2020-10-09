@@ -1,7 +1,8 @@
 <?php
-include"database.php";
+ include("database.php");
 if(isset($_POST['correo']) && ($_POST['validar']) && ($_POST['contra']) && ($_POST['contra2']))
 {
+
 	
 	$email =$_POST['correo'];
 	$clv = $_POST['validar'];
@@ -18,10 +19,17 @@ if(isset($_POST['correo']) && ($_POST['validar']) && ($_POST['contra']) && ($_PO
 			$codigo=$res['help'];
 			
 			if($clv==$codigo)
-			{	$varSalt = uniqid();
-				$passSeguro = hash("sha256",$cont.$varSalt);
-
+			{	
+				echo "otro";
+				$varSalt = uniqid();
+			 	$seed="MiSecreto100";
+				echo "ALGO";
+			 	//$passSeguro =bycript(hash("sha256",$cont.$varSalt),$seed);
+				$passSeguro = hash("sha256",$cont.$varSalt.$seed);
+			 	echo "EL CODIGO";
+				echo $passSeguro;
 				$sql3="UPDATE Users SET help = 0, Password='$passSeguro', Salt='$varSalt' WHERE Mail = '$email';";
+				echo $sql3;
 				mysqli_query($conexion,$sql3);
 				mysqli_close($conexion);
 				

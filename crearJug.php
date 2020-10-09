@@ -1,6 +1,8 @@
 <?php
 include 'database.php';
 
+session_start();
+$usuario= $_SESSION['user'];
 
 if(isset($_POST['nombre']) && ($_POST['apellido']) && ($_POST['email']) && ($_POST['clave']) && ($_POST['fecha'])  && ($_POST['contra'])  && ($_POST['equipo'])  && ($_POST['num'])  && ($_POST['posicion']))
 {
@@ -21,15 +23,17 @@ if(isset($_POST['nombre']) && ($_POST['apellido']) && ($_POST['email']) && ($_PO
 					echo '<script> window.history.go(-1); </script>';
 			}
 			else{
-				if($clave<1||strlen($clave)<7)
+				if($clave<1||strlen($clave)<5)
 				{
 					echo '<script> alert("Revise la clave ULSA"); </script>';
 							echo '<script> window.history.go(-1); </script>';
 				}
 				else{
 					$varSalt = uniqid();
-					$passSeguro = hash("sha256",$varPassword.$varSalt);
-
+					$seed="MiSecreto100";
+					//$passSeguro =bycript(hash("sha256",$contra.$varSalt),$seed);
+					$passSeguro = hash("sha256",$contra.$varSalt.$seed);
+					
 					$fechaC = date("Y-m-d h:i:sa");
 					$date_now = date("Y-m-d"); // this format is string comparable
 
@@ -45,38 +49,33 @@ if(isset($_POST['nombre']) && ($_POST['apellido']) && ($_POST['email']) && ($_PO
 							echo '<script> window.history.go(-1); </script>';
 						}
 						else{
-							$checkUser = "SELECT * FROM Users where User_ID = '$clave' ";
-							$RUN=mysqli_query($conexion,$checkUser);
-							$existUser=mysqli_fetch_assoc($RUN);
-							if($existUser)
+							
+							include ("DAO.php");
+							$varDAO = new UserDAO();
+							$vo = new PlayerVO();
+							$vo->setJugador($clave, $fecha, $equipo, $pos , $num , $nombre, $apellido, $correo, $passSeguro, $varSalt, $fechaC, $usuario);
+							$varVO = $varDAO->verify($vo);
+							
+							if(!$varVO)
 							{
 								echo '<script> alert("El usuario ya existe"); </script>';
 								echo '<script> window.history.go(-1); </script>';
 							}
-							else{
-								$checkClv = "SELECT * FROM Students where ULSA_ID = '$clave'";
-								$RUN=mysqli_query($conexion,$checkClv);
-								$existClv=mysqli_fetch_assoc($RUN);
-								if($existClv)
+							else
+							{
+								$varVO2= $varDAO->insert($vo);
+								$varVO3= $varDAO->insertS($vo);
+								
+								if($varVO2 and $varVO3)
 								{
-									echo '<script> alert("La clave ULSA ya existe"); </script>';
-									echo '<script> window.history.go(-1); </script>';
+									echo '<script> alert("Se creo el usuario"); </script>';
+								echo '<script> window.history.go(-1); </script>';
 								}
 								else
 								{
-									$sql3="INSERT into Users (User_ID, Password, Salt, User_Type, User_Creation_Date, Mail, Name, Last_Name, Status) VALUES('$clave','$passSeguro','$varSalt',2,'$fechaC','$correo','$nombre','$apellido', 1);";
-									$resultado = $conexion->query($sql3);
-									$sql1="INSERT into Students (ULSA_ID, Birth_Date, Team, Player_Position, Player_Number) VALUES($clave,'$fecha','$equipo',$pos,$num);";
-									$resultado = $conexion->query($sql1);
-									if($resultado){
-										echo '<script> alert("Se agregó el usuario."); </script>';
-										echo '<script> window.history.go(-1); </script>';
-									   }
-									else{
-										echo '<script> alert("No se agrego, revise datos."); </script>';
-										echo '<script> window.history.go(-1); </script>';
-									}
-								}	
+									echo "error";
+								}
+								
 							}
 						}	
 					}

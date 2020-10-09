@@ -33,15 +33,15 @@ if(isset($_SESSION['rol']))
 	background-size: cover">
 	
 	<div class="login">
-	<h1>LOGIN</h1>
+	<h1>INICIAR SESIÓN</h1>
 		<form action="login.php" method="POST">	
-	       <input type="correo" name="u" placeholder="Usuario" pattern="[A-Za-z0-9]{5,11}"  title="Solo se permiten minúsculas y números del 0 al 9. Longitud entre 8 a 11 caracteres." required="required">
-	       <input type="password" name="p" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,11}"
+	       <input style="margin-top: 7px;" type="text" name="u" placeholder="Usuario" pattern="[A-Za-z0-9]{5,11}"  title="Solo se permiten minúsculas y números del 0 al 9. Longitud entre 8 a 11 caracteres." required="required">
+	       <input style="margin-top: 7px;" type="password" name="p" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,11}"
  			 title="Debe contener 1 número, una mayúscula y una minúscula. Longitud entre 8 a 11 caracteres." placeholder="Contraseña" required="required">
-			<button type="submit" class="btnMy"> Ingresar </button>			
+			<button style="margin-top: 7px;" type="submit" class="btnMy"> Ingresar </button>			
 		</form>
 <!-- Button trigger modal -->
-<button type="button" class="pop btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" style="width: 99px; height: 20px; font-size: 9px;" class="pop btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" >
   Olvide mi contraseña
 </button>
 
